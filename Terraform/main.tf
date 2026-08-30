@@ -25,7 +25,7 @@ module "vpc" {
   name = "vpc-accenture"
   cidr = "10.0.0.0/16"
 
-  azs             = ["us-east-2a", "us-east-2b"]
+  azs             = ["us-west-2a", "us-west-2b"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
   public_subnets  = ["10.0.101.0/24"]
 
@@ -52,19 +52,18 @@ resource "aws_security_group" "web_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["38.156.0.0/16"]
-  }
-
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["38.156.230.139/32"]
   }
 
   egress {
@@ -96,6 +95,28 @@ resource "aws_security_group" "rds_sg" {
 }
 #----------------------------------------------------
 
+#----------------------------------------------------
+#Key pair
+resource "tls_private_key" "ec2_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+resource "aws_key_pair" "ec2_key" {
+  key_name   = "my-ec2-key"
+  public_key = tls_private_key.ec2_key.public_key_openssh
+}
+
+
+resource "local_file" "ec2_private_key" {
+  filename        = "${path.module}/my-ec2-key.pem"
+  content         = tls_private_key.ec2_key.private_key_pem
+  file_permission = "0600"
+}
+#----------------------------------------------------
+
+
+
+
 
 #----------------------------------------------------
 #EC2
@@ -107,6 +128,7 @@ resource "aws_instance" "app_server" {
   subnet_id              = module.vpc.public_subnets[0]
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
+  key_name = aws_key_pair.ec2_key.key_name
   tags = {
     Name = "spring-webflux"
   }
