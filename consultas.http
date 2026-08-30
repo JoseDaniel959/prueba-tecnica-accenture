@@ -1,0 +1,75 @@
+
+### Craer franquicia
+POST http://localhost:8080/franquicia
+content-type: application/json
+
+{
+  "nombre": "mcdonalds"
+    
+}
+
+### Crear Sucursal
+POST http://localhost:8080/sucursal
+content-type: application/json
+
+{
+  "nombre": "mcdonalds",
+  "franquiciaId":1
+    
+}
+
+### Crear Producto nuevo
+POST http://localhost:8080/producto
+content-type: application/json
+
+{
+  "nombre": "hamburguesa",
+  "stock": 1,
+  "sucursalId":1
+}
+
+### Eliminar Producto
+DELETE http://localhost:8080/producto/1
+
+### Modificar Stock
+PATCH http://localhost:8080/producto/2/stock
+content-type: application/json
+
+{
+  "stock":2
+}
+
+### Productos con mayor stock por sucursal por franquicia seleccioada
+GET http://localhost:8080/producto/conMayorStockPorSucursalPorFranquicia/4
+
+
+### editar nombre a franquicia
+
+PATCH http://localhost:8080/franquicia/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Franquicia Amazonas"
+}
+
+### editar nombre a producto
+PATCH http://localhost:8080/producto/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Monitor LG"
+}
+
+
+### editar nombre a sucursal
+PATCH http://localhost:8080/producto/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Monitor LG"
+}
+
+
+
+
+
