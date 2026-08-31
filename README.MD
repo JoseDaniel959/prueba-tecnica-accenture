@@ -11,9 +11,15 @@ una imagen de ubuntu.
 - <a href="#instalacion">1. Instalación</a>
     - <a href="#instalacionRapida">1.1 Instalación rápida</a>
     - <a href="#instalacionDesarrollo">1.1 Instalación para desarrollo</a>
--
+    
+- <a href="#endpoints">2. Endpoints</a>
+- <a href="#explicacionBackend">3. Explicación de la prueba</h2>
+- <a href="#tecnologiasUtilizadas">3.1 Tecnologias utilizadas</a>
+- <a id="ER">3.3 Modelo Entidad Relación y Base de datos</a>
+- <a href="despliege">4. Despliegue de la aplicacion con Terraform en AWS</a>
 
-<h2 id="instalacion">1. Instalación en Local</h2>
+
+
 
 En esta sección se muestran 2 opciones para la instalación en local. La primera es la más rápida ya que solo usa docker y 
 permite probar los endpoints de la aplicación directamente, pero no es ideal usarla cuando se desee desarrollar. La segunda opción se 
@@ -118,37 +124,101 @@ de volver a instalar
 ```
 
 En caso de no tenerlo instalado o no esté corriendo dentro del sistema, por favor leer los pasos para instalarlo y ejecutarlo en
-<a href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu</a>
+<a href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu</a>. Es posible que se necesite tambíen descargar docker compose
 
-**7. Ejecutar el docker compose dentro de la carpeta de application/**
-```shell-session
-~$ cd prueba-tecnica-accenture/
-~/prueba-tecnica-accenture$ sudo docker compose -f dev.docker-compose.yaml up --build -d
+**7. Instalar postgres 16**
+
+para la instalación de <a href="https://www.postgresql.org/download/linux/ubuntu/">postres</a>16 ejecuta el siguiente comando
+
+```shell-session 
+~$ sudo apt install postgresql-16
 ```
 
-**8. Cuando el anterior comando finalice, ejecutar el siguiente comando**
-```shell-session
-~/prueba-tecnica-accenture$ sudo docker exec postgres_db psql -U postgres -d test -c "
-CREATE TABLE FRANQUICIA(
-    id bigserial CONSTRAINT primary_key_franquicia PRIMARY KEY,
-    nombre varchar CONSTRAINT nombre_franquicia_not_null NOT NULL
+**8. Creación de tablas y base de datos**
+
+Para la creación de las tablas debe seguir los siguientes pasos
+
+conectarse a postgres con el usuario postgres
+
+```shell-session 
+~$ sudo -u postgres psql template1
+```
+
+En la consola de postgres crear la base de datos prueba
+
+```shell-session 
+postgres=# CREATE DATABASE prueba;
+```
+cambiar a la base de datos prueba con el siguiente comando
+
+```shell-session 
+postgres=# \c prueba
+```
+
+Una vez se cambie a la base de datos prueba se debe de crear las tablas
+
+```shell-session 
+prueba=# CREATE TABLE FRANQUICIA(
+	id bigserial CONSTRAINT primary_key_franquicia PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_franquicia_not_null NOT NULL
 );
+
+
 CREATE TABLE SUCURSAL(
-    id bigserial CONSTRAINT primary_key_sucursal PRIMARY KEY,
-    nombre varchar CONSTRAINT nombre_sucursal_not_null NOT NULL,
-    franquicia_id bigint REFERENCES franquicia(id)
+	id bigserial CONSTRAINT primary_key_sucursal PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_sucursal_not_null NOT NULL,
+	franquicia_id bigint REFERENCES franquicia(id)
 );
+
 CREATE TABLE PRODUCTO(
-    id bigserial CONSTRAINT primary_key_producto PRIMARY KEY,
-    nombre varchar CONSTRAINT nombre_producto_not_null NOT NULL,
-    stock bigint NOT NULL CHECK (stock > 0),
-    sucursal_id bigint REFERENCES sucursal(id)
+	id bigserial CONSTRAINT primary_key_producto PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_producto_not_null NOT NULL,
+	stock bigint NOT null CHECK (stock >= 0),
+	sucursal_id bigint REFERENCES sucursal(id)
 );
-"
+
+adicionalmente si desea insertar datos, en el archivo ```init.sql``` hay insert de datos de prueba por si desea poblar la base de edatos
+
+Ahora debe de crear la base de pruebas test, para esto debe de seguir pasos similiares
+
+Crear base de datos test
+```shell-session 
+postgres=# CREATE DATABASE test;
 ```
+
+cambiar a la base de datos test
+```shell-session 
+postgres=# \c test
+```
+
+crear las tablas
+```shell-session 
+test=# CREATE TABLE FRANQUICIA(
+	id bigserial CONSTRAINT primary_key_franquicia PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_franquicia_not_null NOT NULL
+);
+
+
+CREATE TABLE SUCURSAL(
+	id bigserial CONSTRAINT primary_key_sucursal PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_sucursal_not_null NOT NULL,
+	franquicia_id bigint REFERENCES franquicia(id)
+);
+
+CREATE TABLE PRODUCTO(
+	id bigserial CONSTRAINT primary_key_producto PRIMARY KEY,
+	nombre varchar CONSTRAINT nombre_producto_not_null NOT NULL,
+	stock bigint NOT null CHECK (stock >= 0),
+	sucursal_id bigint REFERENCES sucursal(id)
+);
+
+
+```
+
 
 El anterior comando crea las tablas dentro de la base de datos test. La sentencia que crea esta base de datos está en
-el archivo ```init.sql```
+el archivo ```init.sql```. Con los pasos anteriores, se debe de haber creado 2 endpoints para pode acceder a las 2 bases de datos craadas
+localhost:5432/prueba y localhost:5432/test
 
 
 <h2 id="endpoints">2. Endpoints</h2>
@@ -329,7 +399,7 @@ content-type: application/json
 ```
 <h2 id="explicacionBackend">3. Explicación de la prueba</h2>
 
-<h3>3.1 Tecnologias utilizadas</h3>
+<h3 id="tecnologiasUtilizadas">3.1 Tecnologias utilizadas</h3>
 
 
 
@@ -352,7 +422,7 @@ content-type: application/json
 |**lombok** | Dependencia para tener menos código usando notaciones de java| 
 
 
-<h3>3.3 Modelo Entidad Relación y Base de datos </h3>
+<h3 id="ER">3.3 Modelo Entidad Relación y Base de datos </h3>
 
 En esta sección se puede ver el diagrama Entidad Relación realizado para la prueba Técnica. Para el diagrama del modelo entidad relación se usa la notación de Richard Barker. Para la base de datos se usa Postgres 16. El script que se usa para la creación de las tablas se llama ``init.sql``
 
@@ -382,3 +452,9 @@ puede tener de 0 a N Prodcutos
 Modelando lo anterior se obtiene:
 
 ![modelo-er](./imagenesReadMe/Modelo%20E-R.webp)
+
+
+<h2 id="despliege">4. Despliegue de la aplicacion con Terraform en AWS</h2>
+
+Para el despliegue de la aplicación se usa Terraform y se usa AWS. La arquitectura de la aplicación es la siguiente
+
