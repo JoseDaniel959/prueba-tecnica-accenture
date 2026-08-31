@@ -29,7 +29,7 @@ presenta como alternativa en caso de desear desarrollar codigo dentro de la apli
 Antes de pasar a las opciones de instalación se debe de descargar el repositorio usando el siguiente commando
 
 ```shell-session
-~$ git clone 
+~$ git clone https://github.com/JoseDaniel959/prueba-tecnica-accenture.git
 ```
 
 También se debe de descargar docker y docker compose. En el siguiente <a href="https://docs.docker.com/engine/install/ubuntu/">link</a>
