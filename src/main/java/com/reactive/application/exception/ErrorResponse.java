@@ -14,11 +14,9 @@ public class ErrorResponse {
   private LocalDateTime time;
   private String message;
   private Map<String, String> validationErrors;
-  private String path;
 
   public ErrorResponse(LocalDateTime time, String message, String path) {
     this.time = time;
     this.message = message;
-    this.path = path;
   }
 }
