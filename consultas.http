@@ -1,5 +1,9 @@
+##################################################
+#   ENDPOINTS PARA PROBAR EN LOCAL               #
+##################################################
 
-### Craer franquicia
+
+### Craer franquicia en local
 POST http://localhost:8080/franquicia
 content-type: application/json
 
@@ -8,7 +12,7 @@ content-type: application/json
     
 }
 
-### Crear Sucursal
+### Crear Sucursal en local
 POST http://localhost:8080/sucursal
 content-type: application/json
 
@@ -18,7 +22,7 @@ content-type: application/json
     
 }
 
-### Crear Producto nuevo
+### Crear Producto nuevo en local
 POST http://localhost:8080/producto
 content-type: application/json
 
@@ -28,10 +32,10 @@ content-type: application/json
   "sucursalId":1
 }
 
-### Eliminar Producto
+### Eliminar Producto en local
 DELETE http://localhost:8080/producto/1
 
-### Modificar Stock
+### Modificar Stock de un producto en local
 PATCH http://localhost:8080/producto/2/stock
 content-type: application/json
 
@@ -52,6 +56,14 @@ content-type: application/json
   "nombre": "Franquicia Amazonas"
 }
 
+
+### editar nombre a sucursal
+PATCH http://localhost:8080/sucursal/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Monitor LG"
+}
 ### editar nombre a producto
 PATCH http://localhost:8080/producto/4/editar-nombre
 content-type: application/json
@@ -61,8 +73,69 @@ content-type: application/json
 }
 
 
-### editar nombre a sucursal
-PATCH http://localhost:8080/producto/4/editar-nombre
+
+
+
+##################################################
+#   ENDPOINT DESPLEGADOS EN AWS                 #
+##################################################
+
+
+### Craer franquicia
+POST http://35.87.184.43:8080/franquicia
+content-type: application/json
+
+{
+  "nombre": "mcdonalds"
+    
+}
+
+### Crear Sucursal
+POST http://35.87.184.43/sucursal
+content-type: application/json
+
+{
+  "nombre": "mcdonalds",
+  "franquiciaId":1
+    
+}
+
+### Crear Producto nuevo
+POST http://35.87.184.43:8080/producto
+content-type: application/json
+
+{
+  "nombre": "hamburguesa",
+  "stock": 1,
+  "sucursalId":1
+}
+
+### Eliminar Producto
+DELETE http://35.87.184.43:8080/producto/1
+
+### Modificar Stock
+PATCH http://35.87.184.43:8080/producto/2/stock
+content-type: application/json
+
+{
+  "stock":2
+}
+
+### Productos con mayor stock por sucursal por franquicia seleccioada
+GET http://35.87.184.43:8080/producto/conMayorStockPorSucursalPorFranquicia/4
+
+
+### editar nombre a franquicia
+
+PATCH http://35.87.184.43:8080/franquicia/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Franquicia Amazonas"
+}
+
+### editar nombre a producto
+PATCH http://35.87.184.43:8080/producto/4/editar-nombre
 content-type: application/json
 
 {
@@ -70,6 +143,13 @@ content-type: application/json
 }
 
 
+### editar nombre a sucursal
+PATCH http://35.87.184.43:8080/producto/4/editar-nombre
+content-type: application/json
+
+{
+  "nombre": "Monitor LG"
+}
 
 
 
