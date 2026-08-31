@@ -213,13 +213,24 @@ CREATE TABLE PRODUCTO(
 	sucursal_id bigint REFERENCES sucursal(id)
 );
 
-
 ```
-
 
 El anterior comando crea las tablas dentro de la base de datos test. La sentencia que crea esta base de datos está en
 el archivo ```init.sql```. Con los pasos anteriores, se debe de haber creado 2 endpoints para pode acceder a las 2 bases de datos craadas
 localhost:5432/prueba y localhost:5432/test
+
+**9. Correr aplicación en local**
+
+Para corre la aplicación en local, tiene que estar dentro de la carpeta prueba-tecnica-accenture/ y ejecutar el siguiente 
+comando 
+
+```shell-session
+~$ cd prueba-tecnica-accenture/
+~/prueba-tecnica-accenture$ mvn spring-boot:run
+```
+```
+
+
 
 
 <h2 id="endpoints">2. Endpoints</h2>
