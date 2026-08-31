@@ -1,6 +1,7 @@
 package com.reactive.application.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reactive.application.DTO.FranquiciaDTO;
@@ -11,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +28,13 @@ public class FranquiciaController {
 
   
     @PostMapping
+    @ResponseStatus(code = HttpStatus.OK)
     public Mono<FranquiciaDTO> crearFranquicia(@RequestBody @Valid FranquiciaDTO franquicianNuevaDTO) {        
         return franquiciaServiceImp.agregarFranquicia(franquicianNuevaDTO);
     }
 
     @PatchMapping("/{id}/editar-nombre")
+    @ResponseStatus(code = HttpStatus.OK)
     public Mono<FranquiciaDTO> editarNombreFranquicia(@PathVariable Long id , @RequestBody @Valid RequestUpdateFranquicia requestUpdateFranquicia){
         return franquiciaServiceImp.editarNombre(id, requestUpdateFranquicia.getNombre());
     }

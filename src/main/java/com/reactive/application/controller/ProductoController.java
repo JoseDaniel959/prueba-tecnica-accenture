@@ -32,7 +32,7 @@ public class ProductoController {
     final ProductoServiceImp productoServiceImp;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Mono<ProductoDTO> crearProducto(@RequestBody @Valid ProductoDTO productoDTO) {        
         return productoServiceImp.agregarProductoASucursal(productoDTO);
     }
@@ -56,6 +56,7 @@ public class ProductoController {
     }
     
     @PatchMapping("/{id}/editar-nombre")
+    @ResponseStatus(HttpStatus.OK)
     public Mono<ProductoDTO> editarNombreFranquicia(@PathVariable Long id , @RequestBody @Valid RequestUpdateProducto requestUpdateProducto){
         return productoServiceImp.editarNombre(id, requestUpdateProducto.getNombre());
     }
