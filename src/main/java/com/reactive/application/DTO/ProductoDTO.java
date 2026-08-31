@@ -1,5 +1,6 @@
 package com.reactive.application.DTO;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductoDTO {
+    
     private Long id;
 
-     @NotNull(message = "nombre no puede ser nulo")
+    @NotNull(message = "nombre no puede ser nulo")
     private String nombre;
+    
+    @Min(value = 0, message = "Stock no puede ser negativo")
+    @NotNull(message = "Stock no puede ser nulo")
     private Long stock;
-     @NotNull(message = "sucursalID no puede ser nulo")
+    
+    @NotNull(message = "sucursalID no puede ser nulo")
     private Long sucursalId;
 }
 
