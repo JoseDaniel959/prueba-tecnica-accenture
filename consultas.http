@@ -62,14 +62,14 @@ PATCH http://localhost:8080/sucursal/4/editar-nombre
 content-type: application/json
 
 {
-  "nombre": "Monitor LG"
+  "nombre": "Sucursal Manrique"
 }
 ### editar nombre a producto
 PATCH http://localhost:8080/producto/4/editar-nombre
 content-type: application/json
 
 {
-  "nombre": "Monitor LG"
+  "nombre": "Monitor L22G"
 }
 
 

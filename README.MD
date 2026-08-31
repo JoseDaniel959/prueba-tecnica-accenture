@@ -5,7 +5,7 @@ En este repositorio puede encontrar la solución de la prueba técnica **Prueba 
 encontrar toda su descrición y criterios de aceptación en el archivo Prueba ````Prueba Practica Dev. Backend.pdf````
 
 **Importante:** Todos los comandos mostrados en esta documentación son comandos de Linux, por lo que se pide amablemente al lector
-que, si se encuentra usando Windows entonces por favor descargue WSL, el cual es un maquina virtual de Linux dentro de Windows y le permitirá ejecutar los comandos más fácilmente en caso de desear de ejecutar esta aplicación. Preferiblemente para WSL escoja
+que, si se encuentra usando Windows entonces por favor descargue <a href="https://learn.microsoft.com/es-es/windows/wsl/install">WSL</a>, el cual es un maquina virtual de Linux dentro de Windows y le permitirá ejecutar los comandos más fácilmente en caso de desear de ejecutar esta aplicación. Para el WSL escoja
 una imagen de ubuntu.
 
 - <a href="#instalacion">1. Instalación</a>
@@ -16,9 +16,8 @@ una imagen de ubuntu.
 <h2 id="instalacion">1. Instalación en Local</h2>
 
 En esta sección se muestran 2 opciones para la instalación en local. La primera es la más rápida ya que solo usa docker y 
-permite probar la aplicación directamente. La segunda opción se presenta como alternativa en caso de desear desarrollar 
-codigo dentro de la aplicación (Para no estar ejecutando mvn package y docker compose up cada vez que se hace un cambio
-en el código)
+permite probar los endpoints de la aplicación directamente, pero no es ideal usarla cuando se desee desarrollar. La segunda opción se 
+presenta como alternativa en caso de desear desarrollar codigo dentro de la aplicación y realizar los test (Para no estar ejecutando mvn package y docker compose up cada vez que se hace un cambio en la aplicación de spring-webflux)
 
 Antes de pasar a las opciones de instalación se debe de descargar el repositorio usando el siguiente commando
 
@@ -37,15 +36,14 @@ encontrar los pasos para la instalación de docker compose
 
 Una vez se hayan ejecutado los pasos de la documentación oficial de docker se debe de ejecutar los siguiente pasos:
 
-1. Asegurarse que dentro de el archivo ```application.properties``` esté la siguiente opción
-
+**1. Asegurarse que dentro de el archivo ```application.properties``` esté la siguiente opción**
 ```text
 spring.profiles.active=docker
 ```
 esto permitirá a la aplicación de spring-boot saber cual es la URL de la base de datos la 
 cual se encuentra en un contenedor de docker
 
-2. entrar a la carpeta prueba-tecnica-accenture y hacer docker compose up
+**2. entrar a la carpeta prueba-tecnica-accenture y hacer docker compose up**
 
 ```shell-session
 ~$ cd prueba-tecnica-accenture/
@@ -56,7 +54,7 @@ El anterior comando lo que hace es crear los servicios que está definidos dentr
 ```docker-compose.yaml```. El cual son 2 servicios: la RestFul API de java y un contenedor con
 postgres 16
 
-3. Hacer docker ps -a para ver el output de los contenedores corriendo
+**3. Hacer docker ps -a para ver el output de los contenedores corriendo**
 ```shell-session
 ~/prueba-tecnica-accenture$ sudo docker ps -a
 CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                     PORTS                                         NAMES
@@ -65,7 +63,7 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 ```
 Al ejecutar docker ps -a se imprime la tabla anterior. Se debe de asegurar que en la columna status diga **up**
 
-4. Una vez tenga los servicios corriendo como se detalla en el paso anterior ya puede probar los 
+Una vez tenga los servicios corriendo como se detalla en el paso anterior ya puede probar los 
 endpoints de la aplicación. Se sugiere usar visual studio code y descargar la extension 
 <a href=https://marketplace.visualstudio.com/items?itemName=humao.rest-client>REST Client</a> ya 
 que en el proyecto se encuentra un archivo llamado ```consultas.http``` el cual ya tiene 
@@ -76,19 +74,17 @@ todas las consultas http listas para probar la aplicación
 *DISCLAIMER: Esta alternativa es ideal cuando se desee desarrollar código en el proyecto corriendo y ejecutar los test de la aplicación*
 
 
-1. Asegurarse que dentro de el archivo ```application.properties``` esté la siguiente opción
-
+**1. Asegurarse que dentro de el archivo ```application.properties``` esté la siguiente opción**
 ```text
 spring.profiles.active=dev
 ```
 
-2. Descargar el openjdk 17
-
+**2. Descargar el openjdk 17**
 ```shell-session
 ~$ sudo apt-get install openjdk-17-jre
 ```
 
-3. Asegurarse de estar en la versión 17 con el siguiente comando
+**3. Asegurarse de estar en la versión 17 con el siguiente comando**
 ```shell-session
 ~$ java -version
 openjdk version "17.0.20" 2026-07-21
@@ -98,12 +94,12 @@ OpenJDK 64-Bit Server VM (build 17.0.20+8-1-24.04-Ubuntu, mixed mode, sharing)
 si el anterior comando no le muestra un output, es porque no se descargó java correctamente y lo debe
 de volver a instalar
 
-4. Descargar Maven
+**4. Descargar Maven**
 ```shell-session 
 ~$ sudo apt install maven
 ```
 
-5. Verificar que Maven está instalado
+**5. Verificar que Maven está instalado**
 
 ```shell-session 
 ~$ maven -version
@@ -115,7 +111,7 @@ OS name: "linux", version: "6.6.87.2-microsoft-standard-wsl2", arch: "amd64", fa
 si el anterior comando no le muestra un output, es porque no se descargó maven correctamente y lo debe
 de volver a instalar
 
-6. Tener Docker y Docker Compose instalado
+**6. Tener Docker y Docker Compose instalado**
 
 ```shell-session 
 ~$ docker -v
@@ -124,14 +120,13 @@ de volver a instalar
 En caso de no tenerlo instalado o no esté corriendo dentro del sistema, por favor leer los pasos para instalarlo y ejecutarlo en
 <a href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu</a>
 
-7. Ejecutar el docker compose dentro de la carpeta de application/
-
+**7. Ejecutar el docker compose dentro de la carpeta de application/**
 ```shell-session
 ~$ cd prueba-tecnica-accenture/
 ~/prueba-tecnica-accenture$ sudo docker compose -f dev.docker-compose.yaml up --build -d
 ```
 
-8. Cuando el anterior comando finalice, ejecutar el siguiente comando
+**8. Cuando el anterior comando finalice, ejecutar el siguiente comando**
 ```shell-session
 ~/prueba-tecnica-accenture$ sudo docker exec postgres_db psql -U postgres -d test -c "
 CREATE TABLE FRANQUICIA(
@@ -309,7 +304,7 @@ PATCH http://localhost:8080/sucursal/4/editar-nombre
 content-type: application/json
 
 {
-  "nombre": "Monitor LG"
+  "nombre": "Sucursal Manrique"
 }
 ```
 
@@ -359,7 +354,7 @@ content-type: application/json
 
 <h3>3.3 Modelo Entidad Relación y Base de datos </h3>
 
-En esta sección se puede ver el diagrama Entidad Relación realizado para la prueba Técnica. Para el diagrama del modelo entidad relación se usa la notación de Richard Barker. Para la base de datos se usa Postgres 16 y el script que se usa para la creación de las tablas se llama ``init.sql``
+En esta sección se puede ver el diagrama Entidad Relación realizado para la prueba Técnica. Para el diagrama del modelo entidad relación se usa la notación de Richard Barker. Para la base de datos se usa Postgres 16. El script que se usa para la creación de las tablas se llama ``init.sql``
 
 La prueba dice:
 
