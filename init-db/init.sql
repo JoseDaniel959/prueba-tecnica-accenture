@@ -18,7 +18,7 @@ CREATE TABLE SUCURSAL(
 CREATE TABLE PRODUCTO(
 	id bigserial CONSTRAINT primary_key_producto PRIMARY KEY,
 	nombre varchar CONSTRAINT nombre_producto_not_null NOT NULL,
-	stock bigint NOT null CHECK (stock >0),
+	stock bigint NOT null CHECK (stock >= 0),
 	sucursal_id bigint REFERENCES sucursal(id)
 );
 
