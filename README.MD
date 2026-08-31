@@ -14,8 +14,9 @@ una imagen de ubuntu.
     
 - <a href="#endpoints">2. Endpoints</a>
 - <a href="#explicacionBackend">3. Explicación de la prueba</h2>
-- <a href="#tecnologiasUtilizadas">3.1 Tecnologias utilizadas</a>
-- <a id="ER">3.3 Modelo Entidad Relación y Base de datos</a>
+  - <a href="#tecnologiasUtilizadas">3.1 Tecnologias utilizadas</a>
+  - <a href="#dependenciasSpring">3.2 Dependencias usadas para el Proyecto de spring</a>
+  - <a href="#ER">3.3 Modelo Entidad Relación y Base de datos</a>
 - <a href="despliege">4. Despliegue de la aplicacion con Terraform en AWS</a>
 
 
@@ -411,7 +412,7 @@ content-type: application/json
 |**Terraform**  |16|Herramientra de Infraestructur as Code, el cual se utiliza para desplegar la BD y la RestFulAPI | 
 |**AWS**  |---|Cloud service donde terraform despliega los servicios| 
 
-<h3>3.2 Dependencias usadas para el Proyecto de spring</h3>
+<h3 id="dependenciasSpring">3.2 Dependencias usadas para el Proyecto de spring</h3>
 
 | Dependencia | Uso |
 | ---- | --- |
@@ -456,5 +457,14 @@ Modelando lo anterior se obtiene:
 
 <h2 id="despliege">4. Despliegue de la aplicacion con Terraform en AWS</h2>
 
-Para el despliegue de la aplicación se usa Terraform y se usa AWS. La arquitectura de la aplicación es la siguiente
+Para el despliegue de la aplicación se usa Terraform y se usa AWS. La arquitectura de la aplicación se puede ver en el siguiente
+diagrama
 
+![AWS](./imagenesREADME/AWS.webp)
+
+La aplicación de spring está desplegada en un EC2 el cual está asociada a una subnet Pública. Este EC2 se conecta con una base de 
+datos postgres 16 la cual está desplegada en Amazon RDS. Ambos servicios están asociados a security groups para permitir la comunicación
+entre ellos. La subnet pública necesita tener la dirección 0.0.0.0/0 y estar asociado a un IGW para poder permitir que las conexiones
+de internet puedan enviar solicitudes al backend.
+
+El terraform usado para el despliegue de los servicios de aws se encuentra en la carpeta `Terraform/`
