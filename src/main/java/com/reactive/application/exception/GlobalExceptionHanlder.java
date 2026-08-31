@@ -25,8 +25,7 @@ public class GlobalExceptionHanlder {
         ErrorResponse errorResponse = new ErrorResponse(
             LocalDateTime.now(),
             "Unvalid request body",
-            errorsMap,
-            "hola");
+            errorsMap);
         
         return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
     }
