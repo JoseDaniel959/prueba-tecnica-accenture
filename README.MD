@@ -2,7 +2,7 @@
 <h1 style="text-align:center;">Prueba técnica accenture</h1>
 
 En este repositorio puede encontrar la solución de la prueba técnica **Prueba Practica Dev. Backend** el cual puede 
-encontrar toda su descrición y criterios de aceptación en el archivo Prueba ````Prueba Practica Dev. Backend.pdf````
+encontrar toda su descrición y criterios de aceptación en el archivo Prueba ````PRUEBA DESARROLLADOR BACKEND ACCENTURE````
 
 **Importante:** Todos los comandos mostrados en esta documentación son comandos de Linux, por lo que se pide amablemente al lector
 que, si se encuentra usando Windows entonces por favor descargue <a href="https://learn.microsoft.com/es-es/windows/wsl/install">WSL</a>, el cual es un maquina virtual de Linux dentro de Windows y le permitirá ejecutar los comandos más fácilmente en caso de desear de ejecutar esta aplicación. Para el WSL escoja
