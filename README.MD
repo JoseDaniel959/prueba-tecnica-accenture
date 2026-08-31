@@ -463,7 +463,7 @@ puede tener de 0 a N Prodcutos
 
 Modelando lo anterior se obtiene:
 
-![modelo-er](./imagenesReadMe/Modelo%20E-R.webp)
+![modelo-er](./imagenesREADME/E-R.webp)
 
 
 <h2 id="despliege">4. Despliegue de la aplicacion con Terraform en AWS</h2>
