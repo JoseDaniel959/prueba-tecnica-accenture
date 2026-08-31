@@ -17,7 +17,7 @@ una imagen de ubuntu.
   - <a href="#tecnologiasUtilizadas">3.1 Tecnologias utilizadas</a>
   - <a href="#dependenciasSpring">3.2 Dependencias usadas para el Proyecto de spring</a>
   - <a href="#ER">3.3 Modelo Entidad Relación y Base de datos</a>
-- <a href="despliege">4. Despliegue de la aplicacion con Terraform en AWS</a>
+- <a href="#despliege">4. Despliegue de la aplicacion con Terraform en AWS</a>
 
 
 
