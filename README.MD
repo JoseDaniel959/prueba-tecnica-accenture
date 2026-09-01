@@ -362,7 +362,7 @@ content-type: application/json
 }
 
 ### editar nombre a franquicia en la nube
-PATCH http://localhost:8080/franquicia/4/editar-nombre
+PATCH http://35.87.184.43:8080/franquicia/4/editar-nombre
 content-type: application/json
 
 {
@@ -382,7 +382,7 @@ content-type: application/json
 }
 
 ### editar nombre a sucursal en la nube
-PATCH http://localhost:8080/sucursal/4/editar-nombre
+PATCH http://35.87.184.43:8080/sucursal/4/editar-nombre
 content-type: application/json
 
 {
@@ -402,7 +402,7 @@ content-type: application/json
 }
 
 ### editar nombre a producto en la nube
-PATCH http://localhost:8080/producto/4/editar-nombre
+PATCH http://35.87.184.43:8080/producto/4/editar-nombre
 content-type: application/json
 
 {
