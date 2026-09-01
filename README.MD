@@ -1,5 +1,5 @@
 
-<h1 style="text-align:center;">Prueba técnica accenture</h1>
+<h1 style="text-align:center;">Prueba técnica Accenture</h1>
 
 En este repositorio puede encontrar la solución de la prueba técnica **Prueba Practica Dev. Backend** el cual puede 
 encontrar toda su descrición y criterios de aceptación en el archivo Prueba ````PRUEBA DESARROLLADOR BACKEND ACCENTURE````
