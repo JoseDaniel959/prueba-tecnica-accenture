@@ -72,7 +72,7 @@ Al ejecutar docker ps -a se imprime la tabla anterior. Se debe de asegurar que e
 
 Una vez tenga los servicios corriendo como se detalla en el paso anterior ya puede probar los 
 endpoints de la aplicación. Se sugiere usar visual studio code y descargar la extension 
-<a href=https://marketplace.visualstudio.com/items?itemName=humao.rest-client>REST Client</a> ya 
+<a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a> ya 
 que en el proyecto se encuentra un archivo llamado ```consultas.http``` el cual ya tiene 
 todas las consultas http listas para probar la aplicación
 
