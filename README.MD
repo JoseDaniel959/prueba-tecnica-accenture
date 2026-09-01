@@ -34,7 +34,7 @@ Antes de pasar a las opciones de instalación se debe de descargar el repositori
 
 También se debe de descargar docker y docker compose. En el siguiente <a href="https://docs.docker.com/engine/install/ubuntu/">link</a>
 puede encontrar los pasos para la instalación en linux de docker y en el siguiente <a href="https://docs.docker.com/desktop/setup/install/linux/">link</a> puede 
-encontrar los pasos para la instalación de docker compose
+encontrar los pasos para la instalación de <a href="https://docs.docker.com/compose/install/">docker compose</a>
 
 
 <h3 id="instalacionRapida" >1.1 Instalación Rápida</h3>
