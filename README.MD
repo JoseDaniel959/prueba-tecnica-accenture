@@ -1,5 +1,5 @@
 
-<h1 style="text-align:center;">Prueba técnica accenture</h1>
+<h1 style="text-align:center;">Prueba técnica Accenture</h1>
 
 En este repositorio puede encontrar la solución de la prueba técnica **Prueba Practica Dev. Backend** el cual puede 
 encontrar toda su descrición y criterios de aceptación en el archivo Prueba ````PRUEBA DESARROLLADOR BACKEND ACCENTURE````
@@ -29,7 +29,7 @@ presenta como alternativa en caso de desear desarrollar codigo dentro de la apli
 Antes de pasar a las opciones de instalación se debe de descargar el repositorio usando el siguiente commando
 
 ```shell-session
-~$ git clone 
+~$ git clone https://github.com/JoseDaniel959/prueba-tecnica-accenture.git
 ```
 
 También se debe de descargar docker y docker compose. En el siguiente <a href="https://docs.docker.com/engine/install/ubuntu/">link</a>
@@ -362,7 +362,7 @@ content-type: application/json
 }
 
 ### editar nombre a franquicia en la nube
-PATCH http://localhost:8080/franquicia/4/editar-nombre
+PATCH http://35.87.184.43:8080/franquicia/4/editar-nombre
 content-type: application/json
 
 {
@@ -382,7 +382,7 @@ content-type: application/json
 }
 
 ### editar nombre a sucursal en la nube
-PATCH http://localhost:8080/sucursal/4/editar-nombre
+PATCH http://35.87.184.43:8080/sucursal/4/editar-nombre
 content-type: application/json
 
 {
@@ -402,7 +402,7 @@ content-type: application/json
 }
 
 ### editar nombre a producto en la nube
-PATCH http://localhost:8080/producto/4/editar-nombre
+PATCH http://35.87.184.43:8080/producto/4/editar-nombre
 content-type: application/json
 
 {
