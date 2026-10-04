@@ -63,7 +63,7 @@ resource "aws_security_group" "web_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["1.1.1.1/32"]
+    cidr_blocks = ["1.1.1.1/32"] // En esta línea se debe de poner la ip del usuario, para poder acceder por SSH
   }
 
   egress {
